@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azure Hello World</title>
+</head>
+<body>
+
+    <h1>{{ app_info.project }}</h1>
+
+    <h3>{{ welcome }}</h3>
+
+    <hr>
+
+    <p><b>Environment:</b> {{ app_info.environment }}</p>
+    <p><b>Version:</b> {{ app_info.version }}</p>
+    <p><b>Author:</b> {{ app_info.author }}</p>
+
+    <hr>
+
+    <h2>Azure Services</h2>
+
+    <ul>
+    {% for service in services.services %}
+        <li>{{ service }}</li>
+    {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h2>Images in Blob Storage</h2>
+
+    <ul>
+    {% for image in images %}
+        <li>{{ image }}</li>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>
