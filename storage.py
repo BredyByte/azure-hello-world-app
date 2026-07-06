@@ -2,7 +2,16 @@ import json
 import os
 
 from dotenv import load_dotenv
-from azure.storage.blob import BlobServiceClient
+from datetime import datetime, timedelta
+from azure.storage.blob import (
+
+    BlobServiceClient,
+
+    generate_blob_sas,
+
+    BlobSasPermissions,
+
+)
 
 load_dotenv()
 
@@ -64,3 +73,26 @@ def get_blob_url(container_name: str, blob_name: str) -> str:
     )
 
     return blob_client.url
+
+
+def get_blob_sas_url(container_name: str, blob_name: str) -> str:
+    """
+    Generate a temporary URL that allows the browser
+    to download a private blob.
+    """
+
+    blob_client = blob_service_client.get_blob_client(
+        container=container_name,
+        blob=blob_name,
+    )
+
+    sas_token = generate_blob_sas(
+        account_name=blob_client.account_name,
+        container_name=container_name,
+        blob_name=blob_name,
+        account_key=blob_service_client.credential.account_key,
+        permission=BlobSasPermissions(read=True),
+        expiry=datetime.utcnow() + timedelta(hours=1),
+    )
+
+    return f"{blob_client.url}?{sas_token}"

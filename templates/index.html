@@ -27,13 +27,13 @@
 
     <hr>
 
-    <h2>Images in Blob Storage</h2>
+    <h2>Images</h2>
 
-    <ul>
     {% for image in images %}
-        <li>{{ image }}</li>
+
+        <img src="{{ image }}" width="300">
+
     {% endfor %}
-    </ul>
 
 </body>
 </html>

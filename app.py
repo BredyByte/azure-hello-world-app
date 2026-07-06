@@ -4,6 +4,7 @@ from storage import (
     read_text_blob,
     read_json_blob,
     list_blobs,
+    get_blob_sas_url,
 )
 
 app = Flask(__name__)
@@ -27,9 +28,12 @@ def index():
         "services.json"
     )
 
-    images = list_blobs(
-        "images"
-    )
+    image_names = list_blobs("images")
+
+    images = [
+        get_blob_sas_url("images", image)
+        for image in image_names
+    ]
 
     return render_template(
         "index.html",
