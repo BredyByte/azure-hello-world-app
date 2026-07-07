@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Azure Storage</title>
+
+</head>
+
+<body>
+
+<h1>Azure Storage</h1>
+
+<a href="/">Home</a>
+
+<hr>
+
+<h2>Welcome Text</h2>
+
+<p>{{ welcome_text }}</p>
+
+<hr>
+
+<h2>Services</h2>
+
+<ul>
+
+{% for service in services %}
+
+    <li>{{ service }}</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<h2>Images</h2>
+
+{% for image in images %}
+
+    <img
+        src="{{ image.url }}"
+        width="250"
+    >
+
+{% endfor %}
+
+</body>
+
+</html>

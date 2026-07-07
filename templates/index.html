@@ -1,39 +1,33 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-    <title>Azure Hello World</title>
+
+    <title>Hello Azure</title>
+
 </head>
+
 <body>
 
-    <h1>{{ app_info.project }}</h1>
+    <h1>Hello Azure!</h1>
 
-    <h3>{{ welcome }}</h3>
-
-    <hr>
-
-    <p><b>Environment:</b> {{ app_info.environment }}</p>
-    <p><b>Version:</b> {{ app_info.version }}</p>
-    <p><b>Author:</b> {{ app_info.author }}</p>
+    <p>Welcome to the Azure Hello World project.</p>
 
     <hr>
-
-    <h2>Azure Services</h2>
 
     <ul>
-    {% for service in services.services %}
-        <li>{{ service }}</li>
-    {% endfor %}
+
+        <li>
+            <a href="/storage">Azure Storage Demo</a>
+        </li>
+
+        <li>
+            <a href="/sql">Azure SQL Demo</a>
+        </li>
+
     </ul>
 
-    <hr>
-
-    <h2>Images</h2>
-
-    {% for image in images %}
-
-        <img src="{{ image }}" width="300">
-
-    {% endfor %}
-
 </body>
+
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Azure SQL</title>
+
+</head>
+
+<body>
+
+<h1>Azure SQL</h1>
+
+<a href="/">Home</a>
+
+<hr>
+
+<table border="1" cellpadding="8">
+
+    <tr>
+
+        <th>ID</th>
+
+        <th>Message</th>
+
+    </tr>
+
+    {% for message in messages %}
+
+    <tr>
+
+        <td>{{ message.Id }}</td>
+
+        <td>{{ message.Message }}</td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+</body>
+
+</html>

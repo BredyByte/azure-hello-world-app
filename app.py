@@ -3,24 +3,26 @@ from flask import Flask, render_template
 from storage import (
     read_text_blob,
     read_json_blob,
-    list_blobs,
-    get_blob_sas_url,
+    list_images,
 )
+
+from sql import get_messages
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def index():
+def home():
 
-    welcome = read_text_blob(
+    return render_template("index.html")
+
+
+@app.route("/storage")
+def storage():
+
+    welcome_text = read_text_blob(
         "text",
         "welcome.txt"
-    )
-
-    app_info = read_json_blob(
-        "data",
-        "app-info.json"
     )
 
     services = read_json_blob(
@@ -28,21 +30,27 @@ def index():
         "services.json"
     )
 
-    image_names = list_blobs("images")
-
-    images = [
-        get_blob_sas_url("images", image)
-        for image in image_names
-    ]
+    images = list_images("images")
 
     return render_template(
-        "index.html",
-        welcome=welcome,
-        app_info=app_info,
+        "storage.html",
+        welcome_text=welcome_text,
         services=services,
-        images=images,
+        images=images
+    )
+
+
+@app.route("/sql")
+def sql():
+
+    messages = get_messages()
+
+    return render_template(
+        "sql.html",
+        messages=messages
     )
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+

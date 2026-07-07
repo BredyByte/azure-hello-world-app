@@ -47,19 +47,31 @@ def read_json_blob(container_name: str, blob_name: str) -> dict:
     return json.loads(content)
 
 
-def list_blobs(container_name: str) -> list:
+def list_images(container_name: str) -> list:
     """
-    Returns a list of blob names inside a container.
+    Returns all images inside a container together with
+    their temporary SAS URLs.
     """
 
     container_client = blob_service_client.get_container_client(
         container_name
     )
 
-    return [
-        blob.name
-        for blob in container_client.list_blobs()
-    ]
+    images = []
+
+    for blob in container_client.list_blobs():
+
+        images.append(
+            {
+                "name": blob.name,
+                "url": get_blob_sas_url(
+                    container_name,
+                    blob.name
+                )
+            }
+        )
+
+    return images
 
 
 def get_blob_url(container_name: str, blob_name: str) -> str:
