@@ -8,6 +8,8 @@ from storage import (
 
 from sql import get_messages
 
+from key import get_secret
+
 app = Flask(__name__)
 
 
@@ -15,6 +17,16 @@ app = Flask(__name__)
 def home():
 
     return render_template("index.html")
+
+@app.route("/key")
+def key():
+
+    secret = get_secret("welcome-message")
+
+    return render_template(
+        "key.html",
+        secret=secret
+    )
 
 
 @app.route("/storage")
