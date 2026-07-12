@@ -39,7 +39,7 @@ def storage():
 
     services = read_json_blob(
         "data",
-        "services.json"
+        "app-info.json"
     )
 
     images = list_images("images")
