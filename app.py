@@ -1,9 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file
+from io import BytesIO
+import mimetypes
 
 from storage import (
     read_text_blob,
     read_json_blob,
     list_images,
+    get_blob_bytes,
 )
 
 from sql import get_messages
@@ -66,3 +69,13 @@ def sql():
 if __name__ == "__main__":
     app.run(debug=True)
 
+
+@app.route("/images/<path:blob_name>")
+def image(blob_name):
+    image_bytes = get_blob_bytes("images", blob_name)
+    mimetype = mimetypes.guess_type(blob_name)[0] or "application/octet-stream"
+
+    return send_file(
+        BytesIO(image_bytes),
+        mimetype=mimetype,
+    )
