@@ -1,0 +1,13 @@
+{
+
+    "services": [
+
+        "Azure App Service",
+
+        "Azure Blob Storage",
+
+        "Terraform"
+
+    ]
+
+}

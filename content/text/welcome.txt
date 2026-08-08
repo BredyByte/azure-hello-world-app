@@ -1,0 +1,3 @@
+Welcome to the Azure Infrastructure Learning Project!
+
+This content is stored in Azure Blob Storage.
