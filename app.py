@@ -66,10 +66,6 @@ def sql():
     )
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
-
 @app.route("/images/<path:blob_name>")
 def image(blob_name):
     image_bytes = get_blob_bytes("images", blob_name)
@@ -79,3 +75,8 @@ def image(blob_name):
         BytesIO(image_bytes),
         mimetype=mimetype,
     )
+
+
+if __name__ == "__main__":
+    app.run(debug=True, port=8000)
+
