@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
-# Creates and updates Azure SQL application data.
+# Creates and updates Azure SQL application data and permissions.
 # Authentication uses the deployment VM's system-assigned managed identity.
 
 set -euo pipefail
 
-if [[ $# -ne 2 ]]; then
-  echo "Usage: ./deployment/deploy-sql-data.sh <sql-server-name> <database-name>"
+if [[ $# -ne 4 ]]; then
+  echo "Usage: ./deployment/deploy-sql-data.sh <sql-server-name> <database-name> <web-app-name> <web-app-managed-identity-client-id>"
   exit 1
 fi
 
 SQL_SERVER_NAME="$1"
 SQL_DATABASE_NAME="$2"
+WEB_APP_NAME="$3"
+WEB_APP_MANAGED_IDENTITY_CLIENT_ID="$4"
 SQL_SERVER_FQDN="${SQL_SERVER_NAME}.database.windows.net"
 
 SCRIPT_DIRECTORY="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -28,12 +30,13 @@ if [[ ! -f "${SQL_MIGRATION_FILE}" ]]; then
   exit 1
 fi
 
-echo "Deploying SQL data to '${SQL_DATABASE_NAME}'..."
+echo "Deploying SQL data and permissions to '${SQL_DATABASE_NAME}'..."
 
 sqlcmd \
   -S "${SQL_SERVER_FQDN}" \
   -d "${SQL_DATABASE_NAME}" \
   --authentication-method ActiveDirectoryManagedIdentity \
+  -v WEB_APP_NAME="${WEB_APP_NAME}" WEB_APP_MANAGED_IDENTITY_CLIENT_ID="${WEB_APP_MANAGED_IDENTITY_CLIENT_ID}" \
   -i "${SQL_MIGRATION_FILE}" \
   -b
 
