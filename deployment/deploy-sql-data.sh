@@ -5,15 +5,14 @@
 
 set -euo pipefail
 
-if [[ $# -ne 4 ]]; then
-  echo "Usage: ./deployment/deploy-sql-data.sh <sql-server-name> <database-name> <web-app-name> <web-app-managed-identity-client-id>"
+if [[ $# -ne 3 ]]; then
+  echo "Usage: ./deployment/deploy-sql-data.sh <sql-server-name> <database-name> <web-app-name>"
   exit 1
 fi
 
 SQL_SERVER_NAME="$1"
 SQL_DATABASE_NAME="$2"
 WEB_APP_NAME="$3"
-WEB_APP_MANAGED_IDENTITY_CLIENT_ID="$4"
 SQL_SERVER_FQDN="${SQL_SERVER_NAME}.database.windows.net"
 
 SCRIPT_DIRECTORY="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -36,7 +35,7 @@ sqlcmd \
   -S "${SQL_SERVER_FQDN}" \
   -d "${SQL_DATABASE_NAME}" \
   --authentication-method ActiveDirectoryManagedIdentity \
-  -v WEB_APP_NAME="${WEB_APP_NAME}" WEB_APP_MANAGED_IDENTITY_CLIENT_ID="${WEB_APP_MANAGED_IDENTITY_CLIENT_ID}" \
+  -v WEB_APP_NAME="${WEB_APP_NAME}"  \
   -i "${SQL_MIGRATION_FILE}" \
   -b
 
