@@ -6,7 +6,7 @@
 set -euo pipefail
 
 if [[ $# -ne 1 ]]; then
-  echo "Usage: ./deployment/storage-account-data-check.sh <storage-account-name>"
+  echo "Usage: ./deployment/check-storage-account-data.sh <storage-account-name>"
   exit 1
 fi
 

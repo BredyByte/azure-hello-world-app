@@ -5,7 +5,7 @@
 set -euo pipefail
 
 if [[ $# -ne 1 ]]; then
-  echo "Usage: ./deployment/key-vault-data-check.sh <key-vault-name>"
+  echo "Usage: ./deployment/check-key-vault-data.sh <key-vault-name>"
   exit 1
 fi
 
