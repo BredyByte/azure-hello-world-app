@@ -28,9 +28,9 @@ IF NOT EXISTS (
     WHERE name = N'app-dev-helloworld-f800'
 )
 BEGIN
-    CREATE USER [app-dev-helloworld-f800] FROM EXTERNAL PROVIDER;
+    CREATE USER [app-dev-helloworldf800] FROM EXTERNAL PROVIDER;
 END;
 GO
 
-GRANT SELECT ON OBJECT::dbo.Messages TO [app-dev-helloworld-f800];
+GRANT SELECT ON OBJECT::dbo.Messages TO [app-dev-helloworldf800];
 GO

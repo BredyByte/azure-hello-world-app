@@ -7,12 +7,12 @@ DEPLOYMENT_DIR = deployment
 
 # Default Azure resource names. Any value can still be overridden from the
 # command line, for example: make check-sql SQL_DATABASE_NAME=another-database
-RESOURCE_GROUP_NAME = rg-dev-helloworld-f800
-KEY_VAULT_NAME = kv-dev-helloworld-f800
-SQL_SERVER_NAME = sql-dev-helloworld-f800
-SQL_DATABASE_NAME = sqldb-dev-helloworld-f800
+RESOURCE_GROUP_NAME = rg-dev-helloworldf800
+KEY_VAULT_NAME = kv-dev-helloworldf800
+SQL_SERVER_NAME = sql-dev-helloworldf800
+SQL_DATABASE_NAME = sqldb-dev-helloworldf800
 STORAGE_ACCOUNT_NAME = stdevhelloworldf800
-WEB_APP_NAME = app-dev-helloworld-f800
+WEB_APP_NAME = app-dev-helloworldf800
 
 .PHONY: help prepare deploy deploy-key-vault deploy-storage deploy-sql deploy-web-app \
 	check check-key-vault check-storage check-sql require-resource-group \
